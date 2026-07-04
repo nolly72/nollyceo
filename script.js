@@ -32,10 +32,10 @@ const pLinks = [
     "https://upsite-iota.vercel.app/",
     "https://onemorebeautry.vercel.app/",
     "https://vercel.app",
-    "https://vercel.app",
-    "https://vercel.app",
+    "https://crypto-peach-nine.vercel.app/",
+    "https://gadgett.vercel.app/",
     "https://highproject2.vercel.app/",
-    "https://vercel.app",
+    "https://pccompclub.vercel.app/",
     "https://nollybulddd.vercel.app/", // 11
     "https://evakuator-five.vercel.app/",               // 12 (Замените на вашу рабочую ссылку, если есть)
     "https://realbeauty.vercel.app/",               // 13 (Замените на вашу рабочую ссылку, если есть)
