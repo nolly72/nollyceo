@@ -127,14 +127,9 @@ function sendScript(id) {
     }, 400); 
 }
 
-// Обработка отправки формы в Telegram
+// Обработка отправки формы через сервер Vercel
 function submitForm(e) { 
     e.preventDefault(); 
-
-    // === ВСТАВЬТЕ СВОИ ДАННЫЕ СЮДА ===
-    const TELEGRAM_TOKEN = '8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw';
-    const TELEGRAM_CHAT_ID = '1707707954';
-    // ==================================
 
     const form = e.target;
     const submitButton = form.querySelector('button[type="submit"]');
@@ -143,38 +138,34 @@ function submitForm(e) {
     submitButton.innerText = 'Отправка...';
     submitButton.disabled = true;
 
-    // Собираем данные из полей
-    const name = form.elements['name'].value;
-    const phone = form.elements['phone'].value;
-    const messenger = form.elements['messenger'].value;
+    // Собираем данные в обычный объект JSON
+    const data = {
+        name: form.elements['name'].value,
+        phone: form.elements['phone'].value,
+        messenger: form.elements['messenger'].value
+    };
 
-    // Формируем красивый текст сообщения для Telegram
-    const text = `🔔 Новая заявка NOLLY.CEO!\n\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n💬 Мессенджер: ${messenger}`;
-
-    // Отправляем запрос напрямую в API Telegram
-    fetch(`https://telegram.org{TELEGRAM_TOKEN}/sendMessage`, {
+    // Отправляем запрос на наш внутренний роут /api/send
+    fetch('/api/send', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
-            text: text,
-            parse_mode: 'HTML'
-        })
+        body: JSON.stringify(data)
     })
-    .then(response => {
+    .then(async (response) => {
         if (response.ok) {
             alert("Заявка успешно отправлена на высшем уровне! Архитектор NOLLY.CEO свяжется с вами."); 
             sM(false); 
             form.reset(); 
         } else {
-            alert('Ошибка отправки. Попробуйте еще раз.');
+            const json = await response.json();
+            alert('Ошибка отправки: ' + (json.message || 'Неизвестная ошибка'));
         }
     })
     .catch(error => {
         console.error(error);
-        alert('Ошибка сети при отправке в Telegram.');
+        alert('Ошибка соединения с сервером.');
     })
     .then(() => {
         submitButton.innerText = originalButtonText;
