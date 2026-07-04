@@ -172,7 +172,7 @@ function submitForm(e) {
         alert('Ошибка соединения с сервером.');
     })
     .then(() => {
-        // В любом случае возвращаем кнопку в рабочее состояние
+        // В любом случае возвращаем кнопку в рабоачее состояние
         submitButton.innerText = originalButtonText;
         submitButton.disabled = false;
     });
