@@ -138,25 +138,26 @@ function submitForm(e) {
     submitButton.innerText = 'Отправка...';
     submitButton.disabled = true;
 
-    // Собираем данные в обычный объект JSON
+    // Собираем данные в объект
     const data = {
         name: form.elements['name'].value,
         phone: form.elements['phone'].value,
         messenger: form.elements['messenger'].value
     };
 
-    // Отправляем запрос на наш внутренний роут /api/send
+    // Отправляем строго как JSON-строку с соответствующим заголовком
     fetch('/api/send', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
         },
         body: JSON.stringify(data)
     })
     .then(async (response) => {
         if (response.ok) {
             alert("Заявка успешно отправлена на высшем уровне! Архитектор NOLLY.CEO свяжется с вами."); 
-            sM(false); 
+            if (typeof sM === 'function') sM(false); // Безопасное закрытие окна, если функция существует
             form.reset(); 
         } else {
             const json = await response.json();
