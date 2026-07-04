@@ -138,14 +138,13 @@ function submitForm(e) {
     submitButton.innerText = 'Отправка...';
     submitButton.disabled = true;
 
-    // Собираем данные в объект
+    // Собираем данные из полей
     const data = {
         name: form.elements['name'].value,
         phone: form.elements['phone'].value,
         messenger: form.elements['messenger'].value
     };
 
-    // Отправляем строго как JSON-строку с соответствующим заголовком
     fetch('/api/send', {
         method: 'POST',
         headers: {
@@ -156,9 +155,13 @@ function submitForm(e) {
     })
     .then(async (response) => {
         if (response.ok) {
+            // Если сервер ответил успешно — сразу выводим сообщение посетителю
             alert("Заявка успешно отправлена на высшем уровне! Архитектор NOLLY.CEO свяжется с вами."); 
-            if (typeof sM === 'function') sM(false); // Безопасное закрытие окна, если функция существует
             form.reset(); 
+            
+            // Пытаемся закрыть модальное окно через стандартный UI Vercel/HTML, если он есть
+            const overlay = document.getElementById('modalOverlay');
+            if (overlay) overlay.style.display = 'none';
         } else {
             const json = await response.json();
             alert('Ошибка отправки: ' + (json.message || 'Неизвестная ошибка'));
@@ -169,6 +172,7 @@ function submitForm(e) {
         alert('Ошибка соединения с сервером.');
     })
     .then(() => {
+        // В любом случае возвращаем кнопку в рабочее состояние
         submitButton.innerText = originalButtonText;
         submitButton.disabled = false;
     });
