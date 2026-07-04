@@ -26,7 +26,7 @@ const a = {
 
 // Точные ссылки для всех 14 проектов на Vercel
 const pLinks = [
-    "https://vercel.app",
+    "https://cars-phi-self.vercel.app/",
     "https://vercel.app",
     "https://vercel.app",
     "https://vercel.app",
