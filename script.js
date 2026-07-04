@@ -27,18 +27,18 @@ const a = {
 // Точные ссылки для всех 14 проектов на Vercel
 const pLinks = [
     "https://cars-phi-self.vercel.app/",
+    "https://lawyers-nine.vercel.app/",
+    "https://texnika-mu.vercel.app/",
+    "https://upsite-iota.vercel.app/",
+    "https://onemorebeautry.vercel.app/",
     "https://vercel.app",
     "https://vercel.app",
     "https://vercel.app",
+    "https://highproject2.vercel.app/",
     "https://vercel.app",
-    "https://vercel.app",
-    "https://vercel.app",
-    "https://vercel.app",
-    "https://vercel.app",
-    "https://vercel.app",
-    "https://vercel.app", // 11
-    "https://site12.com",               // 12 (Замените на вашу рабочую ссылку, если есть)
-    "https://site13.com",               // 13 (Замените на вашу рабочую ссылку, если есть)
+    "https://nollybulddd.vercel.app/", // 11
+    "https://evakuator-five.vercel.app/",               // 12 (Замените на вашу рабочую ссылку, если есть)
+    "https://realbeauty.vercel.app/",               // 13 (Замените на вашу рабочую ссылку, если есть)
     "https://site14.com"                // 14 (Замените на вашу рабочую ссылку, если есть)
 ];
 
