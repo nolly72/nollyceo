@@ -150,10 +150,17 @@
             <button class="modal-close" id="closeModal">&times;</button>
             <h3>Запустить проект</h3>
             <p>Оставьте свои контакты, и мы свяжемся с вами в течение 15 минут.</p>
+            
+            <!-- ОБНОВЛЕННАЯ ФОРМА С ВАШИМ КЛЮЧОМ И ИМЕНАМИ ПОЛЕЙ -->
             <form id="leadForm" onsubmit="submitForm(event)">
-                <input type="text" placeholder="Ваше имя" required>
-                <input type="tel" placeholder="Номер телефона" required>
-                <input type="text" placeholder="Telegram / WhatsApp" required>
+                <!-- Скрытый ключ для Web3Forms -->
+                <input type="hidden" name="access_key" value="7d07f97f-06e9-437b-b538-2c12151b2d77">
+                
+                <!-- Каждому полю добавлен атрибут name, чтобы данные распознавались -->
+                <input type="text" name="name" placeholder="Ваше имя" required>
+                <input type="tel" name="phone" placeholder="Номер телефона" required>
+                <input type="text" name="messenger" placeholder="Telegram / WhatsApp" required>
+                
                 <button type="submit" class="btn btn-primary" style="width:100%">Отправить заявку</button>
             </form>
         </div>

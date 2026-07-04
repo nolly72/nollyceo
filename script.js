@@ -44,7 +44,7 @@ const pLinks = [
 
 
 // ==========================================
-// 2. ИНИЦИАЛИЗАЦИЯ ИНТЕРФЕЙСА (DOM READY)
+// 2. ИНИЦИАЛИЗАЦИЯ ИНТЕРФАЕЙСА (DOM READY)
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -138,10 +138,48 @@ function appendMessage(t, s) {
     b.scrollTop = b.scrollHeight; 
 }
 
-// Обработка отправки формы
+// Обработка отправки формы через Web3Forms
 function submitForm(e) { 
-    e.preventDefault(); 
-    alert("Заявка успешно отправлена на высшем уровне! Архитектор NOLLY.CEO свяжется с вами."); 
-    sM(false); 
-    e.target.reset(); 
+    e.preventDefault(); // Запрещаем перезагрузку страницы
+
+    const form = e.target;
+    const submitButton = form.querySelector('button[type="submit"]');
+    
+    // Меняем текст на кнопке, чтобы пользователь видел процесс
+    const originalButtonText = submitButton.innerText;
+    submitButton.innerText = 'Отправка...';
+    submitButton.disabled = true;
+
+    // Собираем данные из полей формы
+    const formData = new FormData(form);
+
+    // Отправляем данные на сервер Web3Forms
+    fetch('https://web3forms.com', {
+        method: 'POST',
+        body: formData
+    })
+    .then(async (response) => {
+        let json = await response.json();
+        if (response.status == 200) {
+            // Если всё прошло успешно:
+            alert("Заявка успешно отправлена на высшем уровне! Архитектор NOLLY.CEO свяжется с вами."); 
+            sM(false); // Закрываем модальное окно
+            form.reset(); // Очищаем поля формы
+        } else {
+            // Если сервер вернул ошибку:
+            console.log(json);
+            alert('Что-то пошло не так: ' + json.message);
+        }
+    })
+    .catch(error => {
+        // Если проблемы с интернетом:
+        console.log(error);
+        alert('Ошибка сети. Проверьте подключение к интернету.');
+    })
+    .then(() => {
+        // Возвращаем кнопку в исходное состояние
+        submitButton.innerText = originalButtonText;
+        submitButton.disabled = false;
+    });
 }
+
