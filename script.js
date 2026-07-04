@@ -127,59 +127,57 @@ function sendScript(id) {
     }, 400); 
 }
 
-// Генерация сообщений в окне чата
-function appendMessage(t, s) { 
-    const b = document.getElementById('assistantBody'); 
-    if (!b) return; 
-    const m = document.createElement('div'); 
-    m.className = `msg ${s}`; 
-    m.innerText = t; 
-    b.appendChild(m); 
-    b.scrollTop = b.scrollHeight; 
-}
-
-// Обработка отправки формы через Web3Forms
+// Обработка отправки формы в Telegram
 function submitForm(e) { 
-    e.preventDefault(); // Запрещаем перезагрузку страницы
+    e.preventDefault(); 
+
+    // === ВСТАВЬТЕ СВОИ ДАННЫЕ СЮДА ===
+    const TELEGRAM_TOKEN = '8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw';
+    const TELEGRAM_CHAT_ID = '1707707954';
+    // ==================================
 
     const form = e.target;
     const submitButton = form.querySelector('button[type="submit"]');
     
-    // Меняем текст на кнопке, чтобы пользователь видел процесс
     const originalButtonText = submitButton.innerText;
     submitButton.innerText = 'Отправка...';
     submitButton.disabled = true;
 
-    // Собираем данные из полей формы
-    const formData = new FormData(form);
+    // Собираем данные из полей
+    const name = form.elements['name'].value;
+    const phone = form.elements['phone'].value;
+    const messenger = form.elements['messenger'].value;
 
-    // Отправляем данные на сервер Web3Forms
-    fetch('https://web3forms.com', {
+    // Формируем красивый текст сообщения для Telegram
+    const text = `🔔 Новая заявка NOLLY.CEO!\n\n👤 Имя: ${name}\n📞 Телефон: ${phone}\n💬 Мессенджер: ${messenger}`;
+
+    // Отправляем запрос напрямую в API Telegram
+    fetch(`https://telegram.org{TELEGRAM_TOKEN}/sendMessage`, {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: text,
+            parse_mode: 'HTML'
+        })
     })
-    .then(async (response) => {
-        let json = await response.json();
-        if (response.status == 200) {
-            // Если всё прошло успешно:
+    .then(response => {
+        if (response.ok) {
             alert("Заявка успешно отправлена на высшем уровне! Архитектор NOLLY.CEO свяжется с вами."); 
-            sM(false); // Закрываем модальное окно
-            form.reset(); // Очищаем поля формы
+            sM(false); 
+            form.reset(); 
         } else {
-            // Если сервер вернул ошибку:
-            console.log(json);
-            alert('Что-то пошло не так: ' + json.message);
+            alert('Ошибка отправки. Попробуйте еще раз.');
         }
     })
     .catch(error => {
-        // Если проблемы с интернетом:
-        console.log(error);
-        alert('Ошибка сети. Проверьте подключение к интернету.');
+        console.error(error);
+        alert('Ошибка сети при отправке в Telegram.');
     })
     .then(() => {
-        // Возвращаем кнопку в исходное состояние
         submitButton.innerText = originalButtonText;
         submitButton.disabled = false;
     });
 }
-
