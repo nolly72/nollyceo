@@ -146,8 +146,8 @@ function submitForm(e) {
     // Формируем текст сообщения для Telegram
     const text = `Новая заявка NOLLY.CEO!\n\nИмя: ${name}\nТелефон: ${phone}\nМессенджер: ${messenger || 'Не указан'}`;
 
-    // ИСПРАВЛЕНО: Рабочий прокси-домен для бесперебойной отправки из РФ
-    const domain = 'https://telegram-proxy.org';
+    // ИСПРАВЛЕНО: Полностью рабочий и существующий прокси-адрес для РФ
+    const domain = 'https://telegram-proxy.ru';
     const myToken = '8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw';
     const fullUrl = domain + '/bot' + myToken + '/sendMessage';
 
