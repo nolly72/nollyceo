@@ -146,10 +146,12 @@ function submitForm(e) {
     // Формируем текст сообщения для Telegram
     const text = `Новая заявка NOLLY.CEO!\n\nИмя: ${name}\nТелефон: ${phone}\nМессенджер: ${messenger || 'Не указан'}`;
 
-    const myToken = '8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw';
+    // ИСПРАВЛЕНО: Безопасная сборка адреса по частям, чтобы избежать опечаток в кавычках
+    const apiBase = 'https://api.telegram.org';
+    const botToken = 'bot8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw';
+    const chatId = '1707707954';
     
-    // Используем альтернативный эндпоинт отправки через GET-параметры, который обходит CORS
-    const fullUrl = `https://telegram.org{myToken}/sendMessage?chat_id=1707707954&text=` + encodeURIComponent(text);
+    const fullUrl = apiBase + '/' + botToken + '/sendMessage?chat_id=' + chatId + '&text=' + encodeURIComponent(text);
 
     // Безопасный запрос без JSON заголовков, чтобы браузер не блокировал его по CORS
     fetch(fullUrl, {
