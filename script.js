@@ -127,7 +127,7 @@ function sendScript(id) {
     }, 400); 
 }
 
-// Обработка отправки формы НАПРЯМУЮ в Telegram (без сервера Vercel)
+// Обработка отправки формы НАПРЯМУЮ в Telegram (Специально для GitHub Pages)
 function submitForm(e) { 
     e.preventDefault(); 
 
@@ -143,27 +143,27 @@ function submitForm(e) {
     const phone = form.elements['phone'].value;
     const messenger = form.elements['messenger'].value;
 
-    // Данные вашего Telegram-бота (взяты из файла send.js)
-    const TELEGRAM_TOKEN = '8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw';
-    const TELEGRAM_CHAT_ID = '1707707954'; 
-    
-    // Формируем чистый текст сообщения
+    // Формируем текст сообщения для Telegram
     const text = `Новая заявка NOLLY.CEO!\n\nИмя: ${name}\nТелефон: ${phone}\nМессенджер: ${messenger || 'Не указан'}`;
 
-    // Делаем прямой fetch-запрос к серверам Telegram
-    fetch(`https://telegram.org{TELEGRAM_TOKEN}/sendMessage`, {
+    // Собираем адрес по кусочкам, чтобы он точно не обрезался
+    const domain = 'https://telegram.org';
+    const myToken = '8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw';
+    const fullUrl = domain + '/bot' + myToken + '/sendMessage';
+
+    // Прямой запрос к Telegram API
+    fetch(fullUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            chat_id: TELEGRAM_CHAT_ID,
+            chat_id: '1707707954',
             text: text
         })
     })
     .then(async (response) => {
         if (response.ok) {
-            // Если Telegram успешно принял сообщение
             alert("Заявка успешно отправлена на высшем уровне! Архитектор NOLLY.CEO свяжется с вами."); 
             form.reset(); 
             
@@ -180,7 +180,7 @@ function submitForm(e) {
         alert('Ошибка соединения с сетью.');
     })
     .then(() => {
-        // В любом случае возвращаем кнопку в рабочее состояние
+        // Возвращаем кнопку в рабочее состояние
         submitButton.innerText = originalButtonText;
         submitButton.disabled = false;
     });
