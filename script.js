@@ -146,10 +146,8 @@ function submitForm(e) {
     // Формируем текст сообщения для Telegram
     const text = `Новая заявка NOLLY.CEO!\n\nИмя: ${name}\nТелефон: ${phone}\nМессенджер: ${messenger || 'Не указан'}`;
 
-    // ИСПРАВЛЕНО: Ссылка на ваш собственный рабочий прокси-сервер Cloudflare
-    const workerUrl = '    // ИСПРАВЛЕНО: Ваш точный и полный адрес воркера Cloudflare
+    // ИСПРАВЛЕНО: Чистая строка с вашим адресом Cloudflare без лишних кавычек
     const workerUrl = 'https://purple-glade-68b6.ghasttankix.workers.dev'; 
-'; 
 
     // Отправляем безопасный POST запрос на ваш Cloudflare Worker
     fetch(workerUrl, {
