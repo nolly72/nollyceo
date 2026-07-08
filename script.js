@@ -127,7 +127,7 @@ function sendScript(id) {
     }, 400); 
 }
 
-// Обработка отправки формы через сервер Vercel
+// Обработка отправки формы НАПРЯМУЮ в Telegram (без сервера Vercel)
 function submitForm(e) { 
     e.preventDefault(); 
 
@@ -139,40 +139,48 @@ function submitForm(e) {
     submitButton.disabled = true;
 
     // Собираем данные из полей
-    const data = {
-        name: form.elements['name'].value,
-        phone: form.elements['phone'].value,
-        messenger: form.elements['messenger'].value
-    };
+    const name = form.elements['name'].value;
+    const phone = form.elements['phone'].value;
+    const messenger = form.elements['messenger'].value;
 
-    fetch('/api/send', {
+    // Данные вашего Telegram-бота (взяты из файла send.js)
+    const TELEGRAM_TOKEN = '8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw';
+    const TELEGRAM_CHAT_ID = '1707707954'; 
+    
+    // Формируем чистый текст сообщения
+    const text = `Новая заявка NOLLY.CEO!\n\nИмя: ${name}\nТелефон: ${phone}\nМессенджер: ${messenger || 'Не указан'}`;
+
+    // Делаем прямой fetch-запрос к серверам Telegram
+    fetch(`https://telegram.org{TELEGRAM_TOKEN}/sendMessage`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+            chat_id: TELEGRAM_CHAT_ID,
+            text: text
+        })
     })
     .then(async (response) => {
         if (response.ok) {
-            // Если сервер ответил успешно — сразу выводим сообщение посетителю
+            // Если Telegram успешно принял сообщение
             alert("Заявка успешно отправлена на высшем уровне! Архитектор NOLLY.CEO свяжется с вами."); 
             form.reset(); 
             
-            // Пытаемся закрыть модальное окно через стандартный UI Vercel/HTML, если он есть
+            // Закрываем модальное окно
             const overlay = document.getElementById('modalOverlay');
             if (overlay) overlay.style.display = 'none';
         } else {
             const json = await response.json();
-            alert('Ошибка отправки: ' + (json.message || 'Неизвестная ошибка'));
+            alert('Ошибка отправки: ' + (json.description || 'Неизвестная ошибка'));
         }
     })
     .catch(error => {
         console.error(error);
-        alert('Ошибка соединения с сервером.');
+        alert('Ошибка соединения с сетью.');
     })
     .then(() => {
-        // В любом случае возвращаем кнопку в рабоачее состояние
+        // В любом случае возвращаем кнопку в рабочее состояние
         submitButton.innerText = originalButtonText;
         submitButton.disabled = false;
     });
