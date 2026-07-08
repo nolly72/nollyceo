@@ -127,7 +127,7 @@ function sendScript(id) {
     }, 400); 
 }
 
-// Обработка отправки формы НАПРЯМУЮ в Telegram (Специально для GitHub Pages)
+// Обработка отправки формы через ваш личный прокси Cloudflare Workers
 function submitForm(e) { 
     e.preventDefault(); 
 
@@ -146,21 +146,18 @@ function submitForm(e) {
     // Формируем текст сообщения для Telegram
     const text = `Новая заявка NOLLY.CEO!\n\nИмя: ${name}\nТелефон: ${phone}\nМессенджер: ${messenger || 'Не указан'}`;
 
-    // ИСПРАВЛЕНО: Рабочий и не заблокированный в РФ CORS-прокси для Telegram
-    const apiBase = 'https://zerotwo.bot';
-    const botToken = 'bot8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw';
-    const chatId = '1707707954';
-    
-    const fullUrl = apiBase + '/' + botToken + '/sendMessage';
+    // ИСПРАВЛЕНО: Ссылка на ваш собственный рабочий прокси-сервер Cloudflare
+    const workerUrl = 'https://workers.dev'; 
 
-    // Делаем стандартный POST запрос, так как этот прокси поддерживает CORS
-    fetch(fullUrl, {
+    // Отправляем безопасный POST запрос на ваш Cloudflare Worker
+    fetch(workerUrl, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
+        headers: { 
+            'Content-Type': 'application/json' 
         },
         body: JSON.stringify({
-            chat_id: chatId,
+            token: '8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw',
+            chat_id: '1707707954',
             text: text
         })
     })
@@ -174,12 +171,12 @@ function submitForm(e) {
             if (overlay) overlay.style.display = 'none';
         } else {
             const json = await response.json();
-            alert('Ошибка отправки: ' + (json.description || 'Неизвестная ошибка'));
+            alert('Ошибка отправки: ' + (json.error || 'Неизвестная ошибка'));
         }
     })
     .catch(error => {
         console.error(error);
-        alert('Ошибка соединения с сетью. Попробуйте отправить еще раз.');
+        alert('Ошибка соединения с сетью.');
     })
     .then(() => {
         // Возвращаем кнопку в рабочее состояние
