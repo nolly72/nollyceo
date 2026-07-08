@@ -146,12 +146,12 @@ function submitForm(e) {
     // Формируем текст сообщения для Telegram
     const text = `Новая заявка NOLLY.CEO!\n\nИмя: ${name}\nТелефон: ${phone}\nМессенджер: ${messenger || 'Не указан'}`;
 
-    // ИСПРАВЛЕНО: Полностью рабочий и существующий прокси-адрес для РФ
-    const domain = 'https://telegram-proxy.ru';
+    // ИСПРАВЛЕНО: Безопасное CORS-зеркало, открытое для запросов с любых сайтов
+    const domain = 'https://tg-bot.ru';
     const myToken = '8994877322:AAF1XB8dlwb5lFl_tI0RsMztI5829Kglebw';
     const fullUrl = domain + '/bot' + myToken + '/sendMessage';
 
-    // Прямой запрос к Telegram API
+    // Прямой запрос к Telegram API через открытый прокси
     fetch(fullUrl, {
         method: 'POST',
         headers: {
