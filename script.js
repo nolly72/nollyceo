@@ -147,7 +147,9 @@ function submitForm(e) {
     const text = `Новая заявка NOLLY.CEO!\n\nИмя: ${name}\nТелефон: ${phone}\nМессенджер: ${messenger || 'Не указан'}`;
 
     // ИСПРАВЛЕНО: Ссылка на ваш собственный рабочий прокси-сервер Cloudflare
-    const workerUrl = 'https://workers.dev'; 
+    const workerUrl = '    // ИСПРАВЛЕНО: Ваш точный и полный адрес воркера Cloudflare
+    const workerUrl = 'https://purple-glade-68b6.ghasttankix.workers.dev'; 
+'; 
 
     // Отправляем безопасный POST запрос на ваш Cloudflare Worker
     fetch(workerUrl, {
