@@ -10,7 +10,6 @@ const pN = ["NOLLY CARS", "NOLLY LAWYERS", "Техно сервис", "NOLLY P1L
 const pT = ["Аренда авто", "Услуги адвоката", "Вызов мастера", "Ночной клуб", "Салон красоты", "Салон красоты #2", "Современный прогноз погоды", "Ваше здороьве", "Компьютерный клуб", "Строительство домов", "Эвакуация авто с формой онлайн-заявки", "Салон красоты #3", "Ресторанный альянс", "Защищенный кошелек"];
 const pL = ["cyber", "prime", "vortex", "aura", "helios", "quantum", "apex", "titanium", "nova", "luxe", "monolith", "zenith", "stellar", "omega"];
 
-// 1. ДАННЫЕ ДЛЯ ОТВЕТОВ AI И КОНТАКТОВ
 const q = ["Каковы сроки?", "Что входит в 25к?", "Какие технологии?", "Как начать?", "Нужен договор?", "Делаете SEO?", "Где ваши кейсы?", "Есть скидки?", "Правки бесплатны?", "Связаться с шефом"];
 const a = {
     1: "Простые проекты создаем за 1 день, премиальные сайты любой сложности — за 7-14 дней.",
@@ -25,31 +24,23 @@ const a = {
     10: "Запрос отправлен руководителю! Оставьте свои контакты в форме связи, и наш CEO свяжется с вами лично."
 };
 
+// Точные ссылки для всех 14 проектов на Vercel
 const pLinks = [
     "https://cars-phi-self.vercel.app/",
     "https://lawyers-nine.vercel.app/",
     "https://texnika-mu.vercel.app/",
     "https://upsite-iota.vercel.app/",
     "https://onemorebeautry.vercel.app/",
-    "https://project-six.vercel.app/",       // ИСПРАВЛЕНО: была общая ссылка vercel.app
+    "https://vercel.app",
     "https://crypto-peach-nine.vercel.app/",
     "https://gadgett.vercel.app/",
     "https://highproject2.vercel.app/",
     "https://pccompclub.vercel.app/",
-    "https://nollybulddd.vercel.app/", 
-    "https://evakuator-five.vercel.app/",               
-    "https://realbeauty.vercel.app/",               
-    "https://site14.vercel.app/"              // ИСПРАВЛЕНО: приведено к общему виду vercel.app
+    "https://nollybulddd.vercel.app/", // 11
+    "https://evakuator-five.vercel.app/",               // 12 (Замените на вашу рабочую ссылку, если есть)
+    "https://realbeauty.vercel.app/",               // 13 (Замените на вашу рабочую ссылку, если есть)
+    "https://site14.com"                // 14 (Замените на вашу рабочую ссылку, если есть)
 ];
-
-// ОБЯЗАТЕЛЬНО: Объявление недостающих массивов (замените на ваши реальные данные)
-const t1 = ["Лендинг", "Базовое SEO", "Адаптив"];
-const t2 = ["Корпоративный сайт", "Премиум дизайн", "Интеграции"];
-const t3 = ["Интернет-магазин", "Личный кабинет", "CRM"];
-
-const pN = Array(14).fill("").map((_, i) => `Премиум Проект ${i + 1}`); // Имена проектов
-const pT = Array(14).fill("Разработка под ключ с уникальным дизайном."); // Описание проектов
-const pL = Array(14).fill("React / Node.js"); // Теги технологий
 
 
 // ==========================================
@@ -63,25 +54,27 @@ document.addEventListener("DOMContentLoaded", () => {
         const el = document.getElementById(id);
         if (el && arr) el.innerHTML = arr.map(i => `<li>${i}</li>`).join('');
     };
-    renderList("p-list-1", t1); 
-    renderList("p-list-2", t2); 
-    renderList("p-list-3", t3);
+    // Проверяем существование массивов перед рендером, чтобы избежать падения скрипта
+    if (typeof t1 !== 'undefined') renderList("p-list-1", t1); 
+    if (typeof t2 !== 'undefined') renderList("p-list-2", t2); 
+    if (typeof t3 !== 'undefined') renderList("p-list-3", t3);
 
     // Генерация 14 карточек портфолио
     const pG = document.getElementById("portfolioGrid");
     if (pG && typeof pN !== 'undefined') {
         pG.innerHTML = pN.map((name, i) => {
-            // Для первого проекта — nolly-cars.jpg, для остальных — portfolio2.jpg ... portfolio14.jpg
             const imgPath = i === 0 ? 'img/nolly-cars.jpg' : `img/portfolio${i + 1}.jpg`;
             const currentLink = pLinks[i] || "#";
+            const currentTag = (typeof pL !== 'undefined' && pL[i]) ? pL[i] : 'PROJECT';
+            const currentDesc = (typeof pT !== 'undefined' && pT[i]) ? pT[i] : '';
             
             return `
                 <div class="portfolio-item">
                     <div class="p-img" style="background-image: url('${imgPath}');"></div>
                     <div class="p-info">
                         <h3>${name}</h3>
-                        <p>${pT[i] || ''}</p>
-                        <span class="p-tag" style="display: inline-block; font-size: 11px; text-transform: uppercase; color: #ffb703; margin-bottom: 12px; letter-spacing: 1px;">[${pL[i] || ''}]</span>
+                        <p>${currentDesc}</p>
+                        <span class="p-tag" style="display: inline-block; font-size: 11px; text-transform: uppercase; color: #ffb703; margin-bottom: 12px; letter-spacing: 1px;">[${currentTag}]</span>
                         <a href="${currentLink}" target="_blank">Смотреть сайт &rarr;</a>
                     </div>
                 </div>
@@ -89,33 +82,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }).join('');
     }
 
-    // Вывод кнопок быстрых вопросов в AI-ассистенте
+    // Вывод кнопок быстрых вопросов в AI-ассистенте (Исправлен класс на question-btn для CSS)
     const qB = document.getElementById("aiQuestions");
-    if (qB) {
-        qB.innerHTML = q.map((text, i) => `<button class="script-btn" onclick="sendScript(${i + 1})">${text}</button>`).join('');
+    if (qB && typeof q !== 'undefined') {
+        qB.innerHTML = q.map((text, i) => `<button class="question-btn" onclick="sendScript(${i + 1})">${text}</button>`).join('');
     }
 
     // События модального окна контактов
     document.querySelectorAll(".open-contact").forEach(b => b.addEventListener("click", e => {
         e.preventDefault();
-        if (typeof sM === 'function') sM(true); // Проверка существования функции sM
+        sM(true);
     }));
-    document.getElementById("closeModal")?.addEventListener("click", () => {
-        if (typeof sM === 'function') sM(false);
-    });
+    document.getElementById("closeModal")?.addEventListener("click", () => sM(false));
     document.getElementById("modalOverlay")?.addEventListener("click", e => {
-        if (e.target.id === "modalOverlay" && typeof sM === 'function') sM(false);
+        if (e.target.id === "modalOverlay") sM(false);
     });
 
     // События AI-ассистента
-    document.getElementById("aiToggleBtn")?.addEventListener("click", () => {
-        if (typeof tA === 'function') tA(); // Безопасный вызов
-    });
-    document.getElementById("closeAi")?.addEventListener("click", () => {
-        if (typeof tA === 'function') tA();
-    });
+    document.getElementById("aiToggleBtn")?.addEventListener("click", tA);
+    document.getElementById("closeAi")?.addEventListener("click", tA);
 });
-
 
 // ==========================================
 // 3. ГЛОБАЛЬНЫЕ ФУНКЦИИ УПРАВЛЕНИЯ
@@ -127,14 +113,32 @@ function sM(o) {
     if(modal) modal.style.display = o ? "flex" : "none"; 
 }
 
-// Показ и скрытие чат-ассистента
+// Показ и скрытие чат-ассистента (Исправлена проверка пустых стилей)
 function tA() { 
     const aEl = document.getElementById("assistant"); 
-    if(aEl) aEl.style.display = aEl.style.display === "flex" ? "none" : "flex"; 
+    if(aEl) {
+        const currentDisplay = window.getComputedStyle(aEl).display;
+        aEl.style.display = currentDisplay === "flex" ? "none" : "flex"; 
+    }
+}
+
+// Функция добавления сообщений на экран (Новая, устраняет ошибку)
+function appendMessage(text, sender) {
+    const body = document.getElementById("assistantBody");
+    if (!body) return;
+
+    const messageDiv = document.createElement("div");
+    messageDiv.classList.add("msg", sender);
+    messageDiv.innerText = text;
+
+    body.appendChild(messageDiv);
+    body.scrollTop = body.scrollHeight; // Автоматический скролл вниз к новому сообщению
 }
 
 // Отправка быстрого вопроса в ассистент
 function sendScript(id) { 
+    if (typeof q === 'undefined' || typeof a === 'undefined') return;
+    
     const text = q[id - 1]; 
     appendMessage(text, 'user'); 
     setTimeout(() => { 
@@ -161,7 +165,6 @@ function submitForm(e) {
     // Формируем текст сообщения для Telegram
     const text = `Новая заявка NOLLY.CEO!\n\nИмя: ${name}\nТелефон: ${phone}\nМессенджер: ${messenger || 'Не указан'}`;
 
-    // ИСПРАВЛЕНО: Чистая строка с вашим адресом Cloudflare без лишних кавычек
     const workerUrl = 'https://purple-glade-68b6.ghasttankix.workers.dev'; 
 
     // Отправляем безопасный POST запрос на ваш Cloudflare Worker
