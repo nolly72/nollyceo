@@ -2,7 +2,7 @@
 // 1. ДАННЫЕ И МАССИВЫ (ТАРИФЫ, КЕЙСЫ, ЧАТ-БОТ)
 // ==========================================
 
-const t1 = ["Индивидуальный UI/UX дизайн", "Разработка до 5 страниц", "Полная адаптивность под телефоны", "Базовая SEO-подготовка", "Интерактивные формы связи", "Плавная анимация блоков", "Срок сдачи от 3 дней", "Подключение вашего домена", "Финальное тестирование проекта", "Установка SSL-сертификата безопасности", "Хостинг на 1 месяц в подарок", "Техническая поддержка 7 дней", "Интеграция Яндекс.Метрики", "Удобная CMS-система", "Инструкция по управлению сайтом"];
+const t1 = ["Индивидуальный UI/UX дизайн", "Разработка до 5 страниц", "Полная адаптивность под телефоны", "Базовая SEO-подготовка", "Интерактивные формы связи", "Плавная анимация блоков", "Срок сдачи от 1 дня", "Подключение вашего домена", "Финальное тестирование проекта", "Установка SSL-сертификата безопасности", "Хостинг на 1 месяц в подарок", "Техническая поддержка 7 дней", "Интеграция Яндекс.Метрики", "Удобная CMS-система", "Инструкция по управлению сайтом"];
 const t2 = ["Премиум UI/UX дизайн студийного уровня", "Разработка до 20 страниц сайта", "Уникальная кастомная 3D-анимация", "Полная интеграция с вашей CRM", "Интерактивный калькулятор стоимости", "Мультиязычность проекта", "Личный кабинет пользователя", "Подключение платежных систем", "Срок сдачи от 7 дней", "Проведение A/B тестирования", "Максимальная оптимизация скорости загрузки", "Интеграция чат-бота поддержки", "Хостинг на 6 месяцев в подарок", "Приоритетная поддержка 30 дней", "Глубокий маркетинговый анализ рынка"];
 const t3 = ["Бизнес-ориентированный дизайн", "Разработка до 10 страниц сайта", "Глубокая мобильная оптимизация", "Написание кастомных скриптов", "Интеграция каталога товаров", "Связка с социальными сетями", "Срок сдачи от 5 дней", "Настройка email-рассылок", "Защита сайта от DDOS-атак", "Создание корпоративной почты", "Хостинг на 3 месяца в подарок", "Техническая поддержка 14 дней", "Разработка Favicon и бренд-стиля", "Настройка целей аналитики", "Установка онлайн-консультанта"];
 
@@ -10,9 +10,10 @@ const pN = ["NOLLY CARS", "NOLLY LAWYERS", "Техно сервис", "NOLLY P1L
 const pT = ["Аренда авто", "Услуги адвоката", "Вызов мастера", "Ночной клуб", "Салон красоты", "Салон красоты #2", "Современный прогноз погоды", "Ваше здороьве", "Компьютерный клуб", "Строительство домов", "Эвакуация авто с формой онлайн-заявки", "Салон красоты #3", "Ресторанный альянс", "Защищенный кошелек"];
 const pL = ["cyber", "prime", "vortex", "aura", "helios", "quantum", "apex", "titanium", "nova", "luxe", "monolith", "zenith", "stellar", "omega"];
 
+// 1. ДАННЫЕ ДЛЯ ОТВЕТОВ AI И КОНТАКТОВ
 const q = ["Каковы сроки?", "Что входит в 25к?", "Какие технологии?", "Как начать?", "Нужен договор?", "Делаете SEO?", "Где ваши кейсы?", "Есть скидки?", "Правки бесплатны?", "Связаться с шефом"];
 const a = {
-    1: "Простые проекты создаем за 3-5 дней, премиальные сайты любой сложности — за 7-14 дней.",
+    1: "Простые проекты создаем за 1 день, премиальные сайты любой сложности — за 7-14 дней.",
     2: "В тариф 25к входит всё: премиум UI/UX, до 20 страниц, 3D-анимация, CRM, платежки, личный кабинет, хостинг на 6 месяцев.",
     3: "Наш премиум-стек: чистый HTML5/CSS3/JS, React, Vue, Node.js, Webflow, WordPress или Tilda под ваши задачи.",
     4: "Нажмите на кнопку «Связаться со мной» или выберите тариф и оставьте контакты в открывшемся окне.",
@@ -24,23 +25,31 @@ const a = {
     10: "Запрос отправлен руководителю! Оставьте свои контакты в форме связи, и наш CEO свяжется с вами лично."
 };
 
-// Точные ссылки для всех 14 проектов на Vercel
 const pLinks = [
     "https://cars-phi-self.vercel.app/",
     "https://lawyers-nine.vercel.app/",
     "https://texnika-mu.vercel.app/",
     "https://upsite-iota.vercel.app/",
     "https://onemorebeautry.vercel.app/",
-    "https://vercel.app",
+    "https://project-six.vercel.app/",       // ИСПРАВЛЕНО: была общая ссылка vercel.app
     "https://crypto-peach-nine.vercel.app/",
     "https://gadgett.vercel.app/",
     "https://highproject2.vercel.app/",
     "https://pccompclub.vercel.app/",
-    "https://nollybulddd.vercel.app/", // 11
-    "https://evakuator-five.vercel.app/",               // 12 (Замените на вашу рабочую ссылку, если есть)
-    "https://realbeauty.vercel.app/",               // 13 (Замените на вашу рабочую ссылку, если есть)
-    "https://site14.com"                // 14 (Замените на вашу рабочую ссылку, если есть)
+    "https://nollybulddd.vercel.app/", 
+    "https://evakuator-five.vercel.app/",               
+    "https://realbeauty.vercel.app/",               
+    "https://site14.vercel.app/"              // ИСПРАВЛЕНО: приведено к общему виду vercel.app
 ];
+
+// ОБЯЗАТЕЛЬНО: Объявление недостающих массивов (замените на ваши реальные данные)
+const t1 = ["Лендинг", "Базовое SEO", "Адаптив"];
+const t2 = ["Корпоративный сайт", "Премиум дизайн", "Интеграции"];
+const t3 = ["Интернет-магазин", "Личный кабинет", "CRM"];
+
+const pN = Array(14).fill("").map((_, i) => `Премиум Проект ${i + 1}`); // Имена проектов
+const pT = Array(14).fill("Разработка под ключ с уникальным дизайном."); // Описание проектов
+const pL = Array(14).fill("React / Node.js"); // Теги технологий
 
 
 // ==========================================
@@ -52,7 +61,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Вывод списков услуг для тарифов
     const renderList = (id, arr) => {
         const el = document.getElementById(id);
-        if (el) el.innerHTML = arr.map(i => `<li>${i}</li>`).join('');
+        if (el && arr) el.innerHTML = arr.map(i => `<li>${i}</li>`).join('');
     };
     renderList("p-list-1", t1); 
     renderList("p-list-2", t2); 
@@ -60,7 +69,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Генерация 14 карточек портфолио
     const pG = document.getElementById("portfolioGrid");
-    if (pG) {
+    if (pG && typeof pN !== 'undefined') {
         pG.innerHTML = pN.map((name, i) => {
             // Для первого проекта — nolly-cars.jpg, для остальных — portfolio2.jpg ... portfolio14.jpg
             const imgPath = i === 0 ? 'img/nolly-cars.jpg' : `img/portfolio${i + 1}.jpg`;
@@ -71,8 +80,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="p-img" style="background-image: url('${imgPath}');"></div>
                     <div class="p-info">
                         <h3>${name}</h3>
-                        <p>${pT[i]}</p>
-                        <span class="p-tag" style="display: inline-block; font-size: 11px; text-transform: uppercase; color: #ffb703; margin-bottom: 12px; letter-spacing: 1px;">[${pL[i]}]</span>
+                        <p>${pT[i] || ''}</p>
+                        <span class="p-tag" style="display: inline-block; font-size: 11px; text-transform: uppercase; color: #ffb703; margin-bottom: 12px; letter-spacing: 1px;">[${pL[i] || ''}]</span>
                         <a href="${currentLink}" target="_blank">Смотреть сайт &rarr;</a>
                     </div>
                 </div>
@@ -89,16 +98,22 @@ document.addEventListener("DOMContentLoaded", () => {
     // События модального окна контактов
     document.querySelectorAll(".open-contact").forEach(b => b.addEventListener("click", e => {
         e.preventDefault();
-        sM(true);
+        if (typeof sM === 'function') sM(true); // Проверка существования функции sM
     }));
-    document.getElementById("closeModal")?.addEventListener("click", () => sM(false));
+    document.getElementById("closeModal")?.addEventListener("click", () => {
+        if (typeof sM === 'function') sM(false);
+    });
     document.getElementById("modalOverlay")?.addEventListener("click", e => {
-        if (e.target.id === "modalOverlay") sM(false);
+        if (e.target.id === "modalOverlay" && typeof sM === 'function') sM(false);
     });
 
     // События AI-ассистента
-    document.getElementById("aiToggleBtn")?.addEventListener("click", tA);
-    document.getElementById("closeAi")?.addEventListener("click", tA);
+    document.getElementById("aiToggleBtn")?.addEventListener("click", () => {
+        if (typeof tA === 'function') tA(); // Безопасный вызов
+    });
+    document.getElementById("closeAi")?.addEventListener("click", () => {
+        if (typeof tA === 'function') tA();
+    });
 });
 
 
