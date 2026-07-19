@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отзывы клиентов | NOLLY.CEO</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #050505; /* Ультра-черный фон */
+            color: #ffffff;
+            font-family: system-ui, -apple-system, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 60px 20px;
+            overflow-x: hidden;
+        }
+
+        /* Задний фон с золотистым премиум-свечением */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 40%;
+            height: 40%;
+            background: radial-gradient(circle, rgba(226, 178, 64, 0.08) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Стилизация шапки страницы */
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 600px;
+            z-index: 1;
+        }
+        .reviews-header .subtitle {
+            color: #E2B240; /* Золотой акцент */
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        .reviews-header h1 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            background: linear-gradient(180deg, #ffffff 0%, #888888 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Премиум-контейнер для виджета */
+        .widget-wrapper {
+            width: 100%;
+            max-width: 580px;
+            background: rgba(17, 17, 17, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 178, 64, 0.15); /* Едва заметная золотая рамка */
+            border-radius: 24px;
+            padding: 8px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8), 
+                        0 0 50px rgba(226, 178, 64, 0.02);
+            z-index: 1;
+            transition: border-color 0.3s ease;
+        }
+        .widget-wrapper:hover {
+            border-color: rgba(226, 178, 64, 0.3); /* Подсветка при наведении */
+        }
+
+        /* Стилизация самого Яндекс-виджета внутри контейнера */
+        .widget-wrapper iframe {
+            width: 100%;
+            height: 540px;
+            border: none;
+            border-radius: 18px;
+            display: block;
+            /* Легкий кастомный фильтр для глубокого черного цвета */
+            filter: contrast(1.05) brightness(0.95); 
+        }
+
+        /* Ссылки под виджетом */
+        .footer-links {
+            margin-top: 40px;
+            display: flex;
+            gap: 30px;
+            z-index: 1;
+        }
+        .btn-link {
+            color: #666;
+            text-decoration: none;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+        .btn-link:hover {
+            color: #E2B240;
+        }
+
+        /* Адаптивность для мобилок */
+        @media (max-width: 768px) {
+            body { padding: 40px 15px; }
+            .reviews-header h1 { font-size: 28px; }
+            .widget-wrapper iframe { height: 480px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="reviews-header">
+        <span class="subtitle">DIGITAL EXCELLENCE 2026</span>
+        <h1>Мировые стандарты.<br>Честные отзывы.</h1>
+    </div>
+
+    <div class="widget-wrapper">
+        <!-- ВРЕМЕННЫЙ ПЛЕЙСХОЛДЕР (Замените на свой iframe из Яндекса, когда одобрят) -->
+        <!-- Обязательно укажите параметр &theme=dark в конце ссылки Яндекса -->
+        <iframe src="https://yandex.ru"></iframe>
+    </div>
+
+    <div class="footer-links">
+        <a href="index.html" class="btn-link">← На главную</a>
+    </div>
+
+</body>
+</html>
